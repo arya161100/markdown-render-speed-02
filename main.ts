@@ -1,1 +1,11 @@
-$(cat /workspace/artifacts/markdown-speed/main.ts)
+import { readFileSync, writeFileSync, mkdirSync } from 'fs';
+import { parseMarkdown } from './parse.js';
+const input = process.argv[2] || 'input.md';
+const md = readFileSync(input, 'utf8');
+const start = performance.now();
+const html = parseMarkdown(md);
+const time = performance.now() - start;
+mkdirSync('/output', { recursive: true });
+writeFileSync('/output/result.html', html);
+writeFileSync('/output/time.txt', String(time));
+console.log(`Rendered in ${time}ms`);
