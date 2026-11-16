@@ -1,0 +1,1 @@
+$(cat /workspace/artifacts/markdown-speed/parse.js)
